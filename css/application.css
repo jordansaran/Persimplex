@@ -1,0 +1,59 @@
+.input-field label {
+    color: #000;
+}
+
+.input-field input[type=number]:focus + label {
+    color: #00b0ff;
+}
+.input-field input[type=number]:focus {
+    border-bottom: 1px solid #00b0ff;
+    box-shadow: 0 1px 0 0 #00b0ff;
+}
+
+select option {
+    color: #00b0ff;
+}
+
+.input-field input[type=number].valid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+}
+.input-field input[type=number].invalid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #000;
+}
+
+.dropdown-content li>span {
+    color: #00b0ff !important;
+}
+
+.dropdown-content li>a {
+    color: #000 !important;
+}
+
+.select-content li>span {
+    color: #000 !important;
+}
+
+.select-content li>a {
+    color: #000 !important;
+}
+
+#principal {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
