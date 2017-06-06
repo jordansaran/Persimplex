@@ -31,7 +31,7 @@
                         <i class="material-icons right">send</i>
                     </button>
                     <a id="btnVoltar" class="btn waves-effect waves-light col s4 red left" href="index.php" name="voltar">Voltar</a>
-                </div>hero
+                </div>
             </div>
         </div>
     </form>
