@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="6abe66c0-d72e-44e3-8fc1-eeba6a22d64c" name="MAMP" url="http://localhost/persimplex/">
+      <webServer id="6abe66c0-d72e-44e3-8fc1-eeba6a22d64c" name="MAMP (project level)" url="http://localhost:8080/persimplex/">
         <fileTransfer port="0" mountedRoot="$PROJECT_DIR$/.." accessType="MOUNT" />
       </webServer>
     </option>

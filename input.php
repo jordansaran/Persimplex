@@ -1,6 +1,6 @@
-<?php
-    $decisoes = 4;
-    $restricoes = 5;
+<?php   require_once 'funcao.php';
+    $decisoes = 2;
+    $restricoes = 4;
 ?>
 
 <?php include ('header.php'); ?>
@@ -16,19 +16,18 @@
                 </div>
             </div>
             <div class="row col s12">
-                <label class="col s1" for="funcao">Função</label>
-                <?php for($i = 1; $i <= $decisoes; $i++) { ?>
-                    <div class="input-field col s1">
-                        <input id="variavel<?=$i?>" type="number" class="validate black-text" name="variavel<?=$i?>">
-                        <h6 class="col s1">+</h6>
-                        <label for="variavel<?=$i?>">X<?=$i?></label>
-                    </div>
-                <?php } ?>
+                <label class="col s1">Função:</label>
+                <?php getFuncao($decisoes); ?>
             </div>
             <div class="row col s12">
-                <button id="btnSolucionar" class="btn waves-effect waves-light col s12 blue" type="button" name="solucionar">Solucionar problema
+                <label cclass="col s1" >Restrições:</label>
+                <?php getRestricao($decisoes, $restricoes); ?>
+            </div>
+            <div class="row col s12">
+                <button id="btnSolucionar" class="btn waves-effect waves-light col s4 blue right" type="button" name="solucionar">Solucionar problema
                     <i class="material-icons right">send</i>
                 </button>
+                <a id="btnVoltar" class="btn waves-effect waves-light col s4 red left" href="index.php" name="voltar">Voltar</a>
             </div>
         </div>
     </div>
