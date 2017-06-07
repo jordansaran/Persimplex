@@ -1,9 +1,12 @@
 <?php
-    require_once 'funcao.php';
+    include 'Restricao.php';
 
     $decisoes = $_POST['decisoes'];
     $restricoes = $_POST['restricoes'];
+
+    $restricao = new Restricao($decisoes, $restricoes);
 ?>
+
 
 <?php include ('header.php'); ?>
 <main>
@@ -18,13 +21,24 @@
                         <label for="funcao">Qual o objetivo da função ?</label>
                     </div>
                 </div>
-                <div class="row col s12">
+                <div id="listaDecisoes" class="row col s12">
                     <label class="col s1">Função:</label>
-                    <?php getFuncao($decisoes); ?>
+                    <?php
+                        $restricao->setTipodecisao('DecisaoVariavel');
+                        $restricao->getFuncao();
+                    ?>
                 </div>
                 <div class="row col s12">
                     <label cclass="col s1" >Restrições:</label>
-                    <?php getRestricao($decisoes, $restricoes); ?>
+                    <?php $restricao->getRestricao(); ?>
+                </div>
+                <div class="row hide">
+                    <div class="input-field">
+                        <input id="nDecisoes" type="number" class="hide" name="nDecisoes" value="<?= $restricao->getNumerodecisao(); ?>">
+                    </div>
+                    <div class="input-field">
+                        <input id="nRestricoes" type="number" class="hide" name="nRestricoes" value="<?= $restricao->getNumeroRestricao(); ?>">
+                    </div>
                 </div>
                 <div class="row col s12">
                     <button id="btnSolucionar" class="btn waves-effect waves-light col s4 blue right" type="submit" name="action">Solucionar problema

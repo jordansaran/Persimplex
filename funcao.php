@@ -22,19 +22,20 @@ function getFuncao($decisao)
   }
 }
 
-function setFuncao($j)
+function setFuncao($j, $type)
 {
     echo '<div class="input-field col s1">';
-        echo '<input id="variavel'.$j.'" type="number" class="validate black-text" name="variavel'.$j.'" value="0">';
-        echo '<label for="variavel'.$j.'">x'.$j.'</label>';
+        echo '<input id="variavel'.$j.'" type="number" class="validate black-text" name="'.$type.$j.'" value="0">';
+        echo '<label for="'.$type.$j.'">x'.$j.'</label>';
     echo '</div>';
 }
 
 function getRestricao($decisao, $restricao)
 {
+
     for($i = 1; $i <= $restricao; $i++)
     {
-        echo '<div class="row col s12">';
+        echo '<div id="listaRestricoes" class="row col s12">';
             getFuncao($decisao);
             echo '<div class="input-field col s1">';
                 echo '<select name="opcao" id="opcao">';
@@ -42,7 +43,7 @@ function getRestricao($decisao, $restricao)
                 echo '</select>';
             echo '</div>';
             echo '<div class="input-field col s1">';
-                echo ' <input type="number" class="validate black-text" name="valor">';
+                echo ' <input id="base'.$i.'" type="number" class="validate black-text" name="base'.$i.'">';
             echo '</div>';
         echo '</div>';
     }

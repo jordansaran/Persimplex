@@ -1,5 +1,5 @@
 <main>
-    <form action="input.php" method="POST">
+    <form action="input.php" method="post">
         <div id="page1" class="container">
             <div class="row col s12">
                 <div id="principal" class="container z-depth-5">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button id="btnContinuar" class="btn waves-effect waves-light col s12 blue tooltipped" type="submit" name="action" data-position="bottom" data-delay="3" data-tooltip="Botão para enviar o número de decisões e restriçõs do simplex">Continuar
+                        <button id="btnContinuar" class="btn waves-effect waves-light col s12 light-green tooltipped" type="submit" name="action" data-position="bottom" data-delay="3" data-tooltip="Botão para enviar o número de decisões e restriçõs do simplex">Continuar
                             <i class="material-icons right">send</i>
                         </button>
                     </div>

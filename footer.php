@@ -1,25 +1,25 @@
-    <footer class="page-footer blue">
+    <footer class="page-footer black">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    <h5 class="light-green-text">Persimplex</h5>
+                    <p class="white-text text-lighten-4">Uma solução rápida para resolver problemas de programação linear.</p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
+                    <h5 class="light-green-text">Links</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                        <li><a class="white-text text-lighten-3" href="https://www.facebook.com/jordan.ferreirasaran?ref=bookmarks" target="_blank">Facebook</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-copyright darken-4">
             <div class="container darken-4">
-                © 2017 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                <?php
+                date_default_timezone_set('America/Sao_Paulo');
+                ?>
+                © <?php echo date('Y'); ?> Copyright Text
+                <a class="white-text text-lighten-4 right" href="http://materializecss.com">Layout Materialize</a>
             </div>
         </div>
     </footer>
