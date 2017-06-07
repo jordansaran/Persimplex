@@ -72,6 +72,30 @@ class Simplex
         array_push($this->lista_tabela, $this->tabela);
     }
 
+    public function maximizar()
+    {
+        $interacoes = 20;
+        do {
+            $interacoes--;
+            $this->linhasNulas();
+        } while ( $this->validarFuncao() != True || $interacoes == 0);
+
+    }
+
+    public function validarFuncao()
+    {
+        $validar = True;
+        for($i = 1; $i <= $this->nDecisoes; $i++)
+        {
+            if ( $this->tabela[$this->nRestricoes + 1][$i] != 0 )
+            {
+                $validar = False;
+                break;
+            }
+        }
+
+        return $validar;
+    }
 
     public function quemSaiDaBse()
     {
@@ -102,7 +126,25 @@ class Simplex
 
     public function linhasNulas()
     {
-        //
+        $nulo = $this->zerarLinha();
+        $posicao = $nulo[0];
+        $coeficiente = $nulo[1];
+
+        for($i = 1; $i <= ($this->nRestricoes + 1); $i++)
+        {
+            if( !$this->tabela[$i][$coeficiente] == 0 && $i != $posicao)
+            {
+                $valorNegativo = $this->tabela[$i][$coeficiente] * -1;
+
+                for($j = 1; $j <= $this->qtdeColunasTabela;$j++)
+                {
+
+                    $this->tabela[$i][$j] = $this->tabela[$posicao][$j] * $valorNegativo + $this->tabela[$i][$j];
+                }
+            }
+        }
+
+        array_push($this->lista_tabela, $this->tabela);
     }
 
     public function zerarLinha()
@@ -111,7 +153,7 @@ class Simplex
 
         for($i = 1; $i <= $this->qtdeColunasTabela;$i++) $this->tabela[$regras[0]][$i] = floor($this->tabela[$regras[0]][$i] / $regras[2]);
 
-        return array($regras[1]);
+        return array($regras[0],$regras[1]);
     }
 
     public function procurarMenorCoficienteFuncao()
