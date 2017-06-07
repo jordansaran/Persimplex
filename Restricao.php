@@ -45,14 +45,14 @@ class Restricao extends Decisao
         for($i = 1; $i <= $this->getNumeroRestricao(); $i++)
         {
             echo '<div id="listaRestricoes" class="row col s12">';
-                $this->getFuncao();
+                $this->getFuncaoRestricao($i);
                 echo '<div class="input-field col s1">';
                     echo '<select name="opcao" id="opcao">';
                         echo '<option value="1" selected><=</option>';
                     echo '</select>';
                 echo '</div>';
                 echo '<div class="input-field col s1">';
-                    echo ' <input id="base'.$i.'" type="number" class="validate black-text" name="base'.$i.'">';
+                    echo ' <input id="base'.$i.'" type="number" class="validate black-text" name="base[]">';
                 echo '</div>';
             echo '</div>';
         }

@@ -11,7 +11,7 @@
 <?php include ('header.php'); ?>
 <main>
     <form action="problem.php" method="post">
-        <div id="page2" class="container">
+        <div id="page2" class="col s12">
             <div id="principal" class="container z-depth-5">
                 <div class="row col s12">
                     <div class="input-field col s12">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="row col s12">
-                    <button id="btnSolucionar" class="btn waves-effect waves-light col s4 blue right" type="submit" name="action">Solucionar problema
+                    <button id="btnSolucionar" class="btn waves-effect waves-light col s4 light-green right" type="submit" name="action">Solucionar problema
                         <i class="material-icons right">send</i>
                     </button>
                     <a id="btnVoltar" class="btn waves-effect waves-light col s4 red left" href="index.php" name="voltar">Voltar</a>

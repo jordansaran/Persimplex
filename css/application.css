@@ -59,6 +59,6 @@ main {
     flex: 1 0 auto;
 }
 
-#somar {
-    margin-bottom: 50px;
+.border {
+    font-weight: bolder;
 }
