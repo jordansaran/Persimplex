@@ -7,14 +7,38 @@
     $base = $_POST['base'];
 
     $restricao = array();
-    for ($i = 1; $i <= $nDecisoes; $i++) array_push($restricao, $_POST['RestricaoVariavel'.$i]);
+    for ($i = 1; $i <= $nRestricoes; $i++) array_push($restricao, $_POST['RestricaoVariavel'.$i]);
 
     $simplex = new Simplex($nDecisoes, $nRestricoes, $funcao, $restricao, $base);
 ?>
 
 <?php include 'header.php'; ?>
 <main>
-    <h1 class="center"><i class="large material-icons">warning</i> Em construção.</h1>
-    <?php echo print_r($simplex->tabela); ?>
+    <div class="row container">
+        <div class="row">
+            <table class="responsive-table highlight">
+                <thead>
+                <tr>
+                    <?php
+                    foreach ( $simplex->tabela[0] as $head )
+                        echo '<th>'.$head.'</th>';
+                    ?>
+                </tr>
+                </thead>
+
+                <tbody>
+                <?php
+                for ($i = 1; $i <= $simplex->qtdeRestricao;$i++)
+                {
+                    echo '<tr>';
+                    foreach ($simplex->tabela[$i] as $value)
+                        echo '<td>'.$value.'</td>';
+                    echo '</tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </main>
 <?php include 'footer.php'; ?>
