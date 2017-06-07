@@ -13,11 +13,11 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="decisao" type="number" class="validate black-text tooltipped" name="decisoes" value="2" min="2" max="11" data-position="top" data-delay="3" data-tooltip="Número de variáveis de decisão para solucionar o problema">
+                            <input id="decisao" type="number" class="validate black-text tooltipped" name="decisoes" value="2" min="2" max="5" data-position="top" data-delay="3" data-tooltip="Número de variáveis de decisão para solucionar o problema">
                             <label for="decisao">Quantas variáveis de decisão o problema contém ?</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="restricao" type="number" class="validate black-text tooltipped" name="restricoes" value="0" min="0" max="11" data-position="top" data-delay="3" data-tooltip="Número de variáveis de restrições para solucionar o problema">
+                            <input id="restricao" type="number" class="validate black-text tooltipped" name="restricoes" value="0" min="1" max="5" data-position="top" data-delay="3" data-tooltip="Número de variáveis de restrições para solucionar o problema">
                             <label for="restricao">Quantidade de restrições ?</label>
                         </div>
                     </div>

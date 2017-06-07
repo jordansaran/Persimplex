@@ -50,10 +50,3 @@ class Simplex
 
     }
 }
-
-
-//$tabela['z'][$i - 1] = $_POST['DecisaoVariavel'.$i];
-//if ( $i == $nDecisoes)
-//{
-//    for($j = 1; $j <= $nRestricoes;$j++,$i++) $tabela['z'][$i] = 0;
-//}
