@@ -52,7 +52,7 @@ class Restricao extends Decisao
                     echo '</select>';
                 echo '</div>';
                 echo '<div class="input-field col s1">';
-                    echo ' <input id="base'.$i.'" type="number" class="validate black-text" name="base[]">';
+                    echo ' <input id="base'.$i.'" type="number" class="validate black-text" name="base[]" value="0" min="0">';
                 echo '</div>';
             echo '</div>';
         }

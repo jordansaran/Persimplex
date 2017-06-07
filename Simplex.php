@@ -9,13 +9,19 @@
 class Simplex
 {
     public $tabela = array();
-    public $listaTabela = 0;
+    public $lista_tabela = array();
     public $qtdeRestricao = 0;
+    public $nDecisoes = 0;
+    public $nRestricoes = 0;
+    public $qtdeColunasTabela = 0;
 
     function __construct($decisoes, $restricoes, $função, $restricao, $base)
     {
-        $this->listaTabela = ($decisoes + $restricoes) + 2;
+        $this->qtdeColunasTabela = ($restricoes + $decisoes) + 1;
         $this->qtdeRestricao = $restricoes + 1;
+        $this->nDecisoes = $decisoes;
+        $this->nRestricoes = $restricoes;
+
         //Alimentar a primeira linha da tabela com valores de string
         //Estruturando a tabela como no exercicio do simples
         $this->tabela[0][0] = 'Base';
@@ -60,8 +66,67 @@ class Simplex
 
         //Gerar linha de Z
         $this->tabela[1 + $restricoes][0] = 'Z';
-        for($i = 1; $i <= $decisoes; $i++) $this->tabela[1 + $restricoes][$i] = intval($função[$i - 1]) * -1 ;
+        for($i = 1; $i <= $decisoes; $i++) $this->tabela[1 + $restricoes][$i] = intval($função[$i - 1]) * -1;
         for($i = 1; $i <= $restricoes + 1;$i++) $this->tabela[1 + $restricoes][$i + $decisoes] = 0;
 
+        array_push($this->lista_tabela, $this->tabela);
+    }
+
+
+    public function quemSaiDaBse()
+    {
+        $menorCoficiente = $this->procurarMenorCoficienteFuncao();
+        $posicao = 0;
+        $valor = 999999999;
+
+        for($i = 1; $i <= $this->nRestricoes;$i++)
+        {
+            $x = intval($this->tabela[$i][$menorCoficiente]);
+            $y = intval($this->tabela[$i][$this->qtdeColunasTabela]);
+
+            if( !$x == 0 )
+            {
+                if ( ($y / $x) < $valor )
+                {
+                    $valor = ($y / $x);
+                    $posicao = $i;
+                }
+            }
+        }
+
+        $this->tabela[$posicao][0] = $this->tabela[0][$menorCoficiente];
+
+        //Posicao e valor do Pivo.
+        return array($posicao, $menorCoficiente, $this->tabela[$posicao][$menorCoficiente]);
+    }
+
+    public function linhasNulas()
+    {
+        //
+    }
+
+    public function zerarLinha()
+    {
+        $regras = $this->quemSaiDaBse();
+
+        for($i = 1; $i <= $this->qtdeColunasTabela;$i++) $this->tabela[$regras[0]][$i] = floor($this->tabela[$regras[0]][$i] / $regras[2]);
+
+        return array($regras[1]);
+    }
+
+    public function procurarMenorCoficienteFuncao()
+    {
+        $position = 0;
+        $value = 0;
+        for($i = 1; $i <= $this->nDecisoes; $i++)
+        {
+            if ( $this->tabela[count($this->tabela) - 1][$i] < $value )
+            {
+                $position = $i;
+                $value = $this->tabela[count($this->tabela) - 1][$i];
+            }
+        }
+
+        return $position;
     }
 }

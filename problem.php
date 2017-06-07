@@ -14,8 +14,9 @@
 
 <?php include 'header.php'; ?>
 <main>
-    <div class="row container">
+    <div class="row container" style="border-top: 15px;">
         <div class="row">
+            <?php echo print_r($simplex->zerarLinha()); ?>
             <table class="responsive-table highlight">
                 <thead>
                 <tr>
