@@ -17,9 +17,8 @@ class Simplex
     public $nInteracoes = 20;
     public $opcaoRestricoes;
     public $solucao = array();
-    public $tipoFuncao;
 
-    function __construct($tipo_funcao, $decisoes, $restricoes, $função, $restricao, $opcaoRestricao, $base, $interacoes)
+    function __construct($decisoes, $restricoes, $função, $restricao, $opcaoRestricao, $base, $interacoes)
     {
         $this->qtdeColunasTabela = ($restricoes + $decisoes) + 1;
         $this->qtdeRestricao = $restricoes + 1;
@@ -27,7 +26,6 @@ class Simplex
         $this->nRestricoes = $restricoes;
         $this->nInteracoes = $interacoes;
         $this->opcaoRestricoes = $opcaoRestricao;
-        $this->tipoFuncao = $tipo_funcao;
 
         //Alimentar a primeira linha da tabela com valores de string
         //Estruturando a tabela como no exercicio do simples
@@ -88,11 +86,20 @@ class Simplex
 
     public function maximizar()
     {
-        do {
-            $this->nInteracoes--;
+        for($i = 1; $i <= $this->nInteracoes &&  $this->validarFuncao() !=  True; $i++)
+        {
             $this->linhasNulas();
-        } while ( $this->validarFuncao() != True || $this->nInteracoes == 0);
+            $this->nInteracoes--;
+        }
+    }
 
+    public function minimizar()
+    {
+        for($i = 1; $i <= $this->nInteracoes &&  $this->validarFuncao() !=  True; $i++)
+        {
+            $this->linhasNulas();
+            $this->nInteracoes--;
+        }
     }
 
     public function validarFuncao()
@@ -137,7 +144,7 @@ class Simplex
         return array($posicao, $menorCoficiente, $this->tabela[$posicao][$menorCoficiente]);
     }
 
-    public function linhasNulas()
+    private function linhasNulas()
     {
         $nulo = $this->zerarLinha();
         $posicao = $nulo[0];
@@ -160,7 +167,7 @@ class Simplex
         array_push($this->lista_tabela, $this->tabela);
     }
 
-    public function zerarLinha()
+    private function zerarLinha()
     {
         $regras = $this->quemSaiDaBse();
 
@@ -169,7 +176,7 @@ class Simplex
         return array($regras[0],$regras[1]);
     }
 
-    public function procurarMenorCoficienteFuncao()
+    private function procurarMenorCoficienteFuncao()
     {
         $position = 0;
         $value = 0;

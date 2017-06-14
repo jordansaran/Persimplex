@@ -5,8 +5,8 @@
     $nRestricoes = $_POST['nRestricoes'];
     $funcao = $_POST['DecisaoVariavel'];
     $base = $_POST['base'];
-    $tipo_funcao = $_POST['funcao'];
-    $interacoes = $_POST['nInteracoes'];
+    $tipo_funcao = intval($_POST['funcao']);
+    $interacoes = intval($_POST['nInteracoes']);
 
     if (isset($_POST['passoapasso'])) $passoapasso = boolval($_POST['passoapasso']);
     else $passoapasso = false;
@@ -16,9 +16,10 @@
 
     $opcaoRestricao = $_POST['opcaoRestricao'];
 
-    $simplex = new Simplex($tipo_funcao, $nDecisoes, $nRestricoes, $funcao, $restricao, $opcaoRestricao, $base, $interacoes);
+    $simplex = new Simplex($nDecisoes, $nRestricoes, $funcao, $restricao, $opcaoRestricao, $base, $interacoes);
 
     if ($tipo_funcao == 1) $simplex->maximizar();
+    elseif ($tipo_funcao == 2) $simplex-> maximizar();
 
 ?>
 
@@ -34,7 +35,12 @@
                 if ($passoapasso)
                 {
                     for ($i = 0; $i < count($simplex->lista_tabela); $i++) { ?>
-                        <h6>Interação: <?= ($i + 1) ?></h6>
+                        <?php if ($i == 0) {
+                            echo '<h6 class="border">Estrutura inicial do simplex</h6>';
+                        }
+                        else {
+                            echo '<h6 class="border">Interação: '.$i.'</h6>';
+                        }?>
                         <table class="responsive-table highlight">
                             <thead>
                             <tr>

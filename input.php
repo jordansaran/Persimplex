@@ -1,13 +1,13 @@
 <?php
     include 'Restricao.php';
 
-    $decisoes = $_POST['decisoes'];
-    $restricoes = $_POST['restricoes'];
-    $interacoes = $_POST['interacoes'];
+    $decisoes = intval($_POST['decisoes']);
+    $restricoes = intval($_POST['restricoes']);
+    $interacoes = intval($_POST['interacoes']);
 
     if ( $interacoes == 0 ) $interacoes = 20;
 
-    $restricao = new Restricao($decisoes, $restricoes, $interacoes);
+    $restricao = new Restricao($decisoes, $restricoes);
 ?>
 
 
@@ -74,7 +74,7 @@
                     <button id="btnSolucionar" class="btn waves-effect waves-light col l4 m2 s1 light-green right" type="submit" name="action">Solucionar problema
                         <i class="material-icons right">send</i>
                     </button>
-                    <a id="btnVoltar" class="btn waves-effect waves-light col l4 m2 s1 red left" href="index.php" name="voltar">Voltar</a>
+                    <a id="btnVoltar" class="btn waves-effect waves-light col l4 m2 s1 red left" href="javascript:history.back()" name="voltar">Voltar</a>
                 </div>
             </div>
         </div>
