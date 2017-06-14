@@ -230,4 +230,16 @@ class Simplex
 
         return $resposta;
     }
+
+    public function precoSombra()
+    {
+        $sombra = "";
+        for($i = ($this->nDecisoes + 1); $i <= $this->qtdeColunasTabela;$i++)
+            if( $i == $this->qtdeColunasTabela)
+                $sombra = $sombra.$this->tabela[$this->nRestricoes + 1][$i];
+            else
+                $sombra = $sombra.$this->tabela[$this->nRestricoes + 1][$i].', ';
+
+        return $sombra;
+    }
 }

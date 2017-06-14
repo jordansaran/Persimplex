@@ -99,6 +99,9 @@
                 echo '<p>'.$simplex->restoSolucao().'</p>';
             ?>
         </div>
+        <div class="row">
+            <p>Preço sombra : <?= $simplex->precoSombra(); ?></p>
+        </div>
     </div>
     <div class="row col s12 m6 l3">
         <a id="btnVoltar" class="btn waves-effect waves-light col l12 m6 s3 red right" href="javascript:history.back()" name="voltar" style="margin-top: 10px;">Voltar</a>
