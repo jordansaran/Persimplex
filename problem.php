@@ -91,16 +91,19 @@
         <?php   }  ?>
         </div>
         <div class="row">
-            <h6 class="border">Melhor Solucão</h6>
-            <?php
+            <div class="col l6 m3 s1">
+                <h6 class="border">Melhor Solucão</h6>
+                <?php
                 foreach ($simplex->melhorSolucao() as $value)
                     echo '<p>'.$value[0].' = '.$value[1];
 
                 echo '<p>'.$simplex->restoSolucao().'</p>';
-            ?>
-        </div>
-        <div class="row">
-            <p>Preço sombra : <?= $simplex->precoSombra(); ?></p>
+                ?>
+            </div>
+            <div class="col l6 m3 s1">
+                <h6 class="border">Preços sombras</h6>
+                <?= $simplex->precoSombra(); ?>
+            </div>
         </div>
     </div>
     <div class="row col s12 m6 l3">

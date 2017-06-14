@@ -17,6 +17,7 @@ class Simplex
     public $nInteracoes = 20;
     public $opcaoRestricoes;
     public $solucao = array();
+    public $base = array();
 
     function __construct($decisoes, $restricoes, $função, $restricao, $opcaoRestricao, $base, $interacoes)
     {
@@ -26,6 +27,7 @@ class Simplex
         $this->nRestricoes = $restricoes;
         $this->nInteracoes = $interacoes;
         $this->opcaoRestricoes = $opcaoRestricao;
+        $this->base = $base;
 
         //Alimentar a primeira linha da tabela com valores de string
         //Estruturando a tabela como no exercicio do simples
@@ -52,7 +54,7 @@ class Simplex
             $fx = 'f'.$i;
             $this->tabela[$i][0] = $fx;
 
-            for($j = 1; $j <= $restricoes; $j++)
+            for($j = 1; $j <= $decisoes; $j++)
             {
                 $this->tabela[$i][$j] = floatval($restricao[$i - 1][$j - 1]);
             }
@@ -86,19 +88,23 @@ class Simplex
 
     public function maximizar()
     {
-        for($i = 1; $i <= $this->nInteracoes &&  $this->validarFuncao() !=  True; $i++)
+        for($i = 1; $i <= $this->nInteracoes; $i++)
         {
-            $this->linhasNulas();
-            $this->nInteracoes--;
+            if ($this->validarFuncao() !=  True)
+            {
+                $this->linhasNulas();
+            }
         }
     }
 
     public function minimizar()
     {
-        for($i = 1; $i <= $this->nInteracoes &&  $this->validarFuncao() !=  True; $i++)
+        for($i = 1; $i <= $this->nInteracoes; $i++)
         {
-            $this->linhasNulas();
-            $this->nInteracoes--;
+            if ($this->validarFuncao() !=  True)
+            {
+                $this->linhasNulas();
+            }
         }
     }
 
@@ -107,7 +113,7 @@ class Simplex
         $validar = True;
         for($i = 1; $i <= $this->nDecisoes; $i++)
         {
-            if ( $this->tabela[$this->nRestricoes + 1][$i] != 0 )
+            if ( $this->tabela[$this->nRestricoes + 1][$i] < 0 )
             {
                 $validar = False;
                 break;
@@ -158,7 +164,6 @@ class Simplex
 
                 for($j = 1; $j <= $this->qtdeColunasTabela;$j++)
                 {
-
                     $this->tabela[$i][$j] = $this->tabela[$posicao][$j] * $valorNegativo + $this->tabela[$i][$j];
                 }
             }
@@ -235,11 +240,35 @@ class Simplex
     {
         $sombra = "";
         for($i = ($this->nDecisoes + 1); $i <= $this->qtdeColunasTabela;$i++)
-            if( $i == $this->qtdeColunasTabela)
-                $sombra = $sombra.$this->tabela[$this->nRestricoes + 1][$i];
-            else
-                $sombra = $sombra.$this->tabela[$this->nRestricoes + 1][$i].', ';
+            echo '<p>'.$sombra.$this->tabela[0][$i].' = '.$this->tabela[$this->nRestricoes + 1][$i].'</p>';
 
         return $sombra;
+    }
+
+    public function limiteRestricao()
+    {
+        $resultado = array();
+
+
+        for($w = 0; $w < count($this->base); $w++)
+        {
+            $valor = 0;
+            $base = $this->base;
+            $base[$w] = 1;
+            $conjunto = array();
+
+            for($i = 1; $i <= $this->nRestricoes;$i++)
+            {
+                for($j= ($this->nDecisoes + 1); $j <= ( $this->qtdeColunasTabela - 1 ) ;$j++)
+                {
+                       $valor = $valor + ($this->tabela[$i][$j] * $base[$i - 1]);
+                       echo $this->tabela[$i][$j].' * '.$base[$i - 1].'<br/>';
+                }
+                array_push($conjunto, $valor);
+            }
+            array_push($resultado, $conjunto);
+        }
+
+        print_r($resultado);
     }
 }
