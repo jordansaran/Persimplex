@@ -39,6 +39,8 @@ class Restricao extends Decisao
         $this->numeroRestricao = $numeroRestricao;
     }
 
+
+
     public function getRestricao()
     {
         $this->setTipodecisao('RestricaoVariavel');
@@ -47,8 +49,9 @@ class Restricao extends Decisao
             echo '<div id="listaRestricoes" class="row col s12">';
                 $this->getFuncaoRestricao($i);
                 echo '<div class="input-field col s1">';
-                    echo '<select name="opcao" id="opcao">';
+                    echo '<select name="opcaoRestricao[]" id="opcaoRestricao">';
                         echo '<option value="1" selected><=</option>';
+                        echo '<option value="2">>=</option>';
                     echo '</select>';
                 echo '</div>';
                 echo '<div class="input-field col s1">';

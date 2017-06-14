@@ -14,13 +14,18 @@ class Simplex
     public $nDecisoes = 0;
     public $nRestricoes = 0;
     public $qtdeColunasTabela = 0;
+    public $nInteracoes = 20;
+    public $opcaoRestricoes;
+    public $solucao = array();
 
-    function __construct($decisoes, $restricoes, $função, $restricao, $base)
+    function __construct($decisoes, $restricoes, $função, $restricao, $opcaoRestricao, $base, $interacoes)
     {
         $this->qtdeColunasTabela = ($restricoes + $decisoes) + 1;
         $this->qtdeRestricao = $restricoes + 1;
         $this->nDecisoes = $decisoes;
         $this->nRestricoes = $restricoes;
+        $this->nInteracoes = $interacoes;
+        $this->opcaoRestricoes = $opcaoRestricao;
 
         //Alimentar a primeira linha da tabela com valores de string
         //Estruturando a tabela como no exercicio do simples
@@ -55,9 +60,11 @@ class Simplex
             for($w = 1; $w <= $restricoes; $w++)
             {
                 if ($i == $w)
-                    $this->tabela[$i][$w + $decisoes] = 1;
-                else
-                    $this->tabela[$i][$w + $decisoes] = 0;
+                {
+                    if ( intval($this->opcaoRestricoes[$w - 1]) == 1 ) $this->tabela[$i][$w + $decisoes] = 1;
+                    elseif ( intval($this->opcaoRestricoes[$w - 1]) == 2 ) $this->tabela[$i][$w + $decisoes] = -1;
+                }
+                else $this->tabela[$i][$w + $decisoes] = 0;
             }
 
             //Alimentao com valor de b
@@ -72,13 +79,17 @@ class Simplex
         array_push($this->lista_tabela, $this->tabela);
     }
 
+    function __clone()
+    {
+        // TODO: Implement __clone() method.
+    }
+
     public function maximizar()
     {
-        $interacoes = 20;
         do {
-            $interacoes--;
+            $this->nInteracoes--;
             $this->linhasNulas();
-        } while ( $this->validarFuncao() != True || $interacoes == 0);
+        } while ( $this->validarFuncao() != True || $this->nInteracoes == 0);
 
     }
 
@@ -151,7 +162,7 @@ class Simplex
     {
         $regras = $this->quemSaiDaBse();
 
-        for($i = 1; $i <= $this->qtdeColunasTabela;$i++) $this->tabela[$regras[0]][$i] = floor($this->tabela[$regras[0]][$i] / $regras[2]);
+        for($i = 1; $i <= $this->qtdeColunasTabela;$i++) $this->tabela[$regras[0]][$i] = $this->tabela[$regras[0]][$i] / $regras[2];
 
         return array($regras[0],$regras[1]);
     }
@@ -170,5 +181,44 @@ class Simplex
         }
 
         return $position;
+    }
+
+    public function melhorSolucao()
+    {
+        for ($i = 1; $i <= $this->qtdeRestricao ;$i++)
+            array_push($this->solucao,[ $this->tabela[$i][0] , $this->tabela[$i][$this->qtdeColunasTabela]]);
+
+        return $this->solucao;
+    }
+
+    public function restoSolucao()
+    {
+        $solucao = array();
+        $resto = array();
+
+        $resposta = "";
+
+        for ($i = 0; $i < $this->qtdeRestricao - 1 ;$i++)
+            array_push($solucao, $this->solucao[$i][0]);
+
+        for($i = 1; $i <= $this->qtdeColunasTabela -1;$i++)
+            array_push($resto, $this->tabela[0][$i]);
+
+        $countResto = count($resto);
+
+        for($i = 0; $i < count($solucao); $i++)
+        {
+            $posicao = array_search(strval($solucao[$i]), $resto);
+            if ($posicao !== false)
+                unset($resto[$posicao]);
+        }
+
+        for ($i = 0; $i < $countResto; $i++)
+            if (isset($resto[$i]))
+                $resposta = $resposta.$resto[$i]. ' = ';
+
+        $resposta = $resposta.' 0';
+
+        return $resposta;
     }
 }

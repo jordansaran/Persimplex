@@ -52,22 +52,15 @@ class Decisao
     {
         for($j = 1; $j <= $this->getNumerodecisao(); $j++)
         {
-            if ( $j == 1  )
-            {
-                $this->setFuncao($j);
-            }
-            else
-            {
-                echo '<h6 id="somar" class="col">+</h6>';
-                $this->setFuncao($j);
-            }
+            if ( $j == 1  ) $this->setFuncao($j);
+            else $this->setFuncao($j);
         }
     }
 
     private function setFuncao($count)
     {
         echo '<div class="input-field col s1">';
-            echo '<input id="in'.$this->getTipodecisao().$count.'" type="number" class="validate black-text" name="'.$this->getTipodecisao().'[]'.'" value="0" min="0">';
+            echo '<input id="in'.$this->getTipodecisao().$count.'" type="number" class="validate black-text" name="'.$this->getTipodecisao().'[]'.'" value="0" step="any">';
             echo '<label for="'.$this->getTipodecisao().$count.'">x'.$count.'</label>';
         echo '</div>';
     }
@@ -77,24 +70,16 @@ class Decisao
     {
         for($j = 1; $j <= $this->getNumerodecisao(); $j++)
         {
-            if ( $j == 1  )
-            {
-                $this->setFuncaoRestricao($count, $j);
-            }
-            else
-            {
-                echo '<h6 id="somar" class="col">+</h6>';
-                $this->setFuncaoRestricao($count, $j);
-            }
+            if ( $j == 1  ) $this->setFuncaoRestricao($count, $j);
+            else $this->setFuncaoRestricao($count, $j);
         }
     }
 
     private function setFuncaoRestricao($restricaoCount, $count)
     {
         echo '<div class="input-field col s1">';
-            echo '<input id="in'.$this->getTipodecisao().$count.'" type="number" class="validate black-text" name="'.$this->getTipodecisao().$restricaoCount.'[]'.'" value="0" min="0">';
+            echo '<input id="in'.$this->getTipodecisao().$count.'" type="number" class="validate black-text" name="'.$this->getTipodecisao().$restricaoCount.'[]'.'" value="0" step="any">';
             echo '<label for="'.$this->getTipodecisao().$count.'">x'.$count.'</label>';
         echo '</div>';
     }
-
 }

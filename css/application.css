@@ -62,3 +62,7 @@ main {
 .border {
     font-weight: bolder;
 }
+
+#sobre {
+    cursor: hand;
+}

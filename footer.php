@@ -1,3 +1,4 @@
+
     <footer class="page-footer black">
         <div class="container">
             <div class="row">
@@ -8,7 +9,18 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="light-green-text">Links</h5>
                     <ul>
-                        <li><a class="white-text text-lighten-3 border" href="https://www.facebook.com/jordan.ferreirasaran?ref=bookmarks" target="_blank">Facebook</a></li>
+                        <li>
+                            <a id="sobre" class="white-text text-lighten-3 border">Sobre</a>
+                            <div class="tap-target light-green" data-activates="sobre">
+                                <div class="tap-target-content">
+                                    <h4>Membros:</h4>
+                                    <p>Jordan Ferreira Saran</p>
+                                    <p>Valdeir da Silva Neto</p>
+                                    <p>William Rodrigues Martins Ferreira.</p>
+                                    <p>Marcelo de Souza dos Santos</p>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
