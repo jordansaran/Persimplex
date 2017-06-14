@@ -156,9 +156,9 @@ class Simplex
         $posicao = $nulo[0];
         $coeficiente = $nulo[1];
 
-        for($i = 1; $i <= ($this->nRestricoes + 1); $i++)
+        for($i = 1; $i <= $this->nRestricoes + 1; $i++)
         {
-            if( !$this->tabela[$i][$coeficiente] == 0 && $i != $posicao)
+            if( !$this->tabela[$i][$coeficiente] == 0 && $i !== $posicao)
             {
                 $valorNegativo = $this->tabela[$i][$coeficiente] * -1;
 
@@ -176,7 +176,8 @@ class Simplex
     {
         $regras = $this->quemSaiDaBse();
 
-        for($i = 1; $i <= $this->qtdeColunasTabela;$i++) $this->tabela[$regras[0]][$i] = $this->tabela[$regras[0]][$i] / $regras[2];
+        for($i = 1; $i <= $this->qtdeColunasTabela;$i++)
+            $this->tabela[$regras[0]][$i] = $this->tabela[$regras[0]][$i] / $regras[2];
 
         return array($regras[0],$regras[1]);
     }
@@ -262,13 +263,16 @@ class Simplex
                 for($j= ($this->nDecisoes + 1); $j <= ( $this->qtdeColunasTabela - 1 ) ;$j++)
                 {
                        $valor = $valor + ($this->tabela[$i][$j] * $base[$i - 1]);
-                       echo $this->tabela[$i][$j].' * '.$base[$i - 1].'<br/>';
+                       //echo $this->tabela[$i][$j].' * '.$base[$i - 1].'<br/>';
                 }
                 array_push($conjunto, $valor);
             }
+            sort($conjunto);
+            echo 'Menor valor -> '.min($conjunto).' Maior valor -> '.max($conjunto).'<br/>';
             array_push($resultado, $conjunto);
         }
 
-        print_r($resultado);
+
+        //print_r($resultado);
     }
 }
