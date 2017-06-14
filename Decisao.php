@@ -60,7 +60,7 @@ class Decisao
     private function setFuncao($count)
     {
         echo '<div class="input-field col s1">';
-            echo '<input id="in'.$this->getTipodecisao().$count.'" type="number" class="validate black-text" name="'.$this->getTipodecisao().'[]'.'" value="0" step="any">';
+            echo '<input id="in'.$this->getTipodecisao().$count.'" type="number" class="validate black-text" name="'.$this->getTipodecisao().'[]'.'" value="0" step="0.01">';
             echo '<label for="'.$this->getTipodecisao().$count.'">x'.$count.'</label>';
         echo '</div>';
     }
@@ -78,7 +78,7 @@ class Decisao
     private function setFuncaoRestricao($restricaoCount, $count)
     {
         echo '<div class="input-field col s1">';
-            echo '<input id="in'.$this->getTipodecisao().$count.'" type="number" class="validate black-text" name="'.$this->getTipodecisao().$restricaoCount.'[]'.'" value="0" step="any">';
+            echo '<input id="in'.$this->getTipodecisao().$count.'" type="number" class="validate black-text" name="'.$this->getTipodecisao().$restricaoCount.'[]'.'" value="0" step="0.01">';
             echo '<label for="'.$this->getTipodecisao().$count.'">x'.$count.'</label>';
         echo '</div>';
     }

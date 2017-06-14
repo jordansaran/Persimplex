@@ -17,8 +17,9 @@ class Simplex
     public $nInteracoes = 20;
     public $opcaoRestricoes;
     public $solucao = array();
+    public $tipoFuncao;
 
-    function __construct($decisoes, $restricoes, $função, $restricao, $opcaoRestricao, $base, $interacoes)
+    function __construct($tipo_funcao, $decisoes, $restricoes, $função, $restricao, $opcaoRestricao, $base, $interacoes)
     {
         $this->qtdeColunasTabela = ($restricoes + $decisoes) + 1;
         $this->qtdeRestricao = $restricoes + 1;
@@ -26,6 +27,7 @@ class Simplex
         $this->nRestricoes = $restricoes;
         $this->nInteracoes = $interacoes;
         $this->opcaoRestricoes = $opcaoRestricao;
+        $this->tipoFuncao = $tipo_funcao;
 
         //Alimentar a primeira linha da tabela com valores de string
         //Estruturando a tabela como no exercicio do simples
@@ -54,7 +56,7 @@ class Simplex
 
             for($j = 1; $j <= $restricoes; $j++)
             {
-                $this->tabela[$i][$j] = $restricao[$i - 1][$j - 1];
+                $this->tabela[$i][$j] = floatval($restricao[$i - 1][$j - 1]);
             }
 
             for($w = 1; $w <= $restricoes; $w++)
@@ -68,12 +70,12 @@ class Simplex
             }
 
             //Alimentao com valor de b
-            $this->tabela[$i][($decisoes + $restricoes + 1)] = $base[$i - 1];
+            $this->tabela[$i][($decisoes + $restricoes + 1)] = floatval($base[$i - 1]);
         }
 
         //Gerar linha de Z
         $this->tabela[1 + $restricoes][0] = 'Z';
-        for($i = 1; $i <= $decisoes; $i++) $this->tabela[1 + $restricoes][$i] = intval($função[$i - 1]) * -1;
+        for($i = 1; $i <= $decisoes; $i++) $this->tabela[1 + $restricoes][$i] = floatval($função[$i - 1]) * -1;
         for($i = 1; $i <= $restricoes + 1;$i++) $this->tabela[1 + $restricoes][$i + $decisoes] = 0;
 
         array_push($this->lista_tabela, $this->tabela);

@@ -16,7 +16,7 @@
 
     $opcaoRestricao = $_POST['opcaoRestricao'];
 
-    $simplex = new Simplex($nDecisoes, $nRestricoes, $funcao, $restricao, $opcaoRestricao, $base, $interacoes);
+    $simplex = new Simplex($tipo_funcao, $nDecisoes, $nRestricoes, $funcao, $restricao, $opcaoRestricao, $base, $interacoes);
 
     if ($tipo_funcao == 1) $simplex->maximizar();
 
