@@ -19,15 +19,12 @@
     $simplex = new Simplex($nDecisoes, $nRestricoes, $funcao, $restricao, $opcaoRestricao, $base, $interacoes);
 
     if ($tipo_funcao == 1) $simplex->maximizar();
-    elseif ($tipo_funcao == 2) $simplex-> maximizar();
+    elseif ($tipo_funcao == 2) $simplex-> minimizar();
 
 ?>
 
 <?php include 'header.php'; ?>
 <main>
-    <div class="row col s12 m6 l3">
-        <a id="btnVoltar" class="btn waves-effect waves-light col l12 m6 s3 red right" href="javascript:history.back()" name="voltar" style="margin-top: 10px;">Voltar</a>
-    </div>
     <div class="container" style="border-top: 15px;">
         <div class="row">
             <br/>
@@ -91,26 +88,55 @@
         <?php   }  ?>
         </div>
         <div class="row">
-            <div class="col l6 m3 s1">
-                <h6 class="border">Melhor Solucão</h6>
+            <div class="col l4 m2 s1">
+                <h6 class="border">Variáveis Básicas</h6>
                 <?php
                 foreach ($simplex->melhorSolucao() as $value)
                     echo '<p>'.$value[0].' = '.$value[1];
-
-                echo '<p>'.$simplex->restoSolucao().'</p>';
                 ?>
             </div>
-            <div class="col l6 m3 s1">
+            <div class="col l4 m2 s1">
+                <h6 class="border">Não Básicas</h6>
+                <?php $simplex->restoSolucao(); ?>
+            </div>
+            <div class="col l4 m2 s1">
                 <h6 class="border">Preços sombras</h6>
                 <?= $simplex->precoSombra(); ?>
             </div>
         </div>
         <div class="row">
-            <?= $simplex->limiteRestricao(); ?>
+            <h6 class="border">Limite de restrições</h6>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variáveis</th>
+                        <th>Menor valor</th>
+                        <th>Maior valor</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php
+                        $resultado = $simplex->limiteRestricao();
+
+                        foreach ($resultado as $valor)
+                        {
+                            echo '<tr>';
+                                foreach ($valor as $item)
+                                {
+                                    echo '<td>'.$item.'</td>';
+                                }
+                            echo '</tr>';
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="row col s12 m6 l3">
-        <a id="btnVoltar" class="btn waves-effect waves-light col l12 m6 s3 red right" href="javascript:history.back()" name="voltar" style="margin-top: 10px;">Voltar</a>
+        <div class="container">
+            <a id="btnVoltar" class="btn waves-effect waves-light col l12 m6 s3 red" href="javascript:history.back()" name="voltar">Voltar</a>
+        </div>
     </div>
 </main>
 <?php include 'footer.php'; ?>

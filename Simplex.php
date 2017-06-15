@@ -131,8 +131,8 @@ class Simplex
 
         for($i = 1; $i <= $this->nRestricoes;$i++)
         {
-            $x = intval($this->tabela[$i][$menorCoficiente]);
-            $y = intval($this->tabela[$i][$this->qtdeColunasTabela]);
+            $x = floatval($this->tabela[$i][$menorCoficiente]);
+            $y = floatval($this->tabela[$i][$this->qtdeColunasTabela]);
 
             if( !$x == 0 )
             {
@@ -211,8 +211,6 @@ class Simplex
         $solucao = array();
         $resto = array();
 
-        $resposta = "";
-
         for ($i = 0; $i < $this->qtdeRestricao - 1 ;$i++)
             array_push($solucao, $this->solucao[$i][0]);
 
@@ -230,17 +228,13 @@ class Simplex
 
         for ($i = 0; $i < $countResto; $i++)
             if (isset($resto[$i]))
-                $resposta = $resposta.$resto[$i]. ' = ';
-
-        $resposta = $resposta.' 0';
-
-        return $resposta;
+                echo '<p>'.$resto[$i].' = 0';
     }
 
     public function precoSombra()
     {
         $sombra = "";
-        for($i = ($this->nDecisoes + 1); $i <= $this->qtdeColunasTabela;$i++)
+        for($i = ($this->nDecisoes + 1); $i <= $this->qtdeColunasTabela -1;$i++)
             echo '<p>'.$sombra.$this->tabela[0][$i].' = '.$this->tabela[$this->nRestricoes + 1][$i].'</p>';
 
         return $sombra;
@@ -250,29 +244,24 @@ class Simplex
     {
         $resultado = array();
 
-
-        for($w = 0; $w < count($this->base); $w++)
+        for($j= ($this->nDecisoes + 1), $w= 1; $j <= ( $this->qtdeColunasTabela - 1 ) && $w <= $this->nRestricoes ;$j++, $w++)
         {
-            $valor = 0;
-            $base = $this->base;
-            $base[$w] = 1;
             $conjunto = array();
-
             for($i = 1; $i <= $this->nRestricoes;$i++)
             {
-                for($j= ($this->nDecisoes + 1); $j <= ( $this->qtdeColunasTabela - 1 ) ;$j++)
-                {
-                       $valor = $valor + ($this->tabela[$i][$j] * $base[$i - 1]);
-                       //echo $this->tabela[$i][$j].' * '.$base[$i - 1].'<br/>';
-                }
-                array_push($conjunto, $valor);
+                $valor = 0;
+                if ( $this->tabela[$i][$j] != 0 )
+                    $valor = $this->tabela[$i][$this->qtdeColunasTabela] / $this->tabela[$i][$j] * -1;
+
+               array_push($conjunto, $valor);
             }
+
             sort($conjunto);
-            echo 'Menor valor -> '.min($conjunto).' Maior valor -> '.max($conjunto).'<br/>';
-            array_push($resultado, $conjunto);
+            $conjunto[0] = $conjunto[0] + $this->base[$w - 1];
+            $conjunto[(count($conjunto) -1)] = $conjunto[(count($conjunto) -1)] + $this->base[$w - 1];
+
+            array_push($resultado, [$this->tabela[0][$j], $conjunto[0], $conjunto[(count($conjunto) -1)]]);
         }
-
-
-        //print_r($resultado);
+        return $resultado;
     }
 }
