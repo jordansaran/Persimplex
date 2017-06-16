@@ -56,7 +56,7 @@ programação linear, visando buscar a solução ótima para o problema.
 | Requisitos    | Ferramentas   |
 |---------------|---------------|
 | Navegadores   | Google Chrome, Mozilla Firefox, Opera, Safari, Microsoft Edge e Internet Explorer 9+.     |
-| Sistemas Operacionais     | UNIX, Windows.    |
+| Sistemas Operacionais     | UNIX, Mac OS X, Windows.    |
 
 ## Tecnologias
 
