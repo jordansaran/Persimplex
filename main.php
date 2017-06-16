@@ -9,7 +9,7 @@
                             <select name="metodo" id="metodo">
                                 <option value="1" selected>Simplex</option>
                             </select>
-                            <label for="metodo">Metódo</label>
+                            <label for="metodo">Método</label>
                         </div>
                     </div>
                     <div class="row">
